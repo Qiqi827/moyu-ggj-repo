@@ -83,7 +83,7 @@ public class MaskStateManager : MonoBehaviour
         {
             if (obj.activeSelf)
             {
-                SetObjectColor(obj, Color.blue);
+                SetObjectColor(obj, Color.grey);
             }
         }
         
@@ -92,7 +92,7 @@ public class MaskStateManager : MonoBehaviour
         {
             if (obj.activeSelf)
             {
-                SetObjectColor(obj, Color.yellow);
+                SetObjectColor(obj, Color.white);
             }
         }
     }
