@@ -8,6 +8,21 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Level/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Level/Scenes/StartingScene.unity
+    guid: 372dac2ae1d9fac42885d78b92827c4c
+  - enabled: 1
+    path: Assets/Level/Scenes/WhiteBox_StateChange_withSceneChange.unity
+    guid: ee72737a7c0394c4f99aade109b4b15b
+  - enabled: 1
+    path: Assets/Level/Scenes/WhiteBox_TestLevel _withSceneChange.unity
+    guid: 4116547b3dd371d428b651762b3fba23
+  - enabled: 1
+    path: Assets/Level/Scenes/WhiteBox_TestLevel.unity
+    guid: 533c84854d2464f4591afa4ce85f15a0
+  - enabled: 1
+    path: Assets/Level/Scenes/WhiteBox_StateChange.unity
+    guid: 76821567f46fdd44c86136e0d4a4d226
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

@@ -11,8 +11,11 @@ public class LevelEndTrigger : MonoBehaviour
     {
         if (!other.CompareTag("Player")) return;
 
+        Debug.Log("[LevelEndTrigger] 玩家进入结束区域");
         var manager = FindObjectOfType<LevelSceneManager>();
         if (manager != null)
             manager.OnPlayerReachedEnd();
+        else
+            Debug.LogWarning("[LevelEndTrigger] 场景中未找到 LevelSceneManager");
     }
 }

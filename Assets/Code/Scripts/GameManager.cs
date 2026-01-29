@@ -24,11 +24,13 @@ namespace Code.Scripts
         {
             if (Instance != null && Instance != this)
             {
+                Debug.Log("[GameManager] 已存在单例，销毁重复实例");
                 Destroy(gameObject);
                 return;
             }
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            Debug.Log("[GameManager] 单例已创建，DontDestroyOnLoad");
         }
 
         void OnEnable()
@@ -44,11 +46,13 @@ namespace Code.Scripts
         void Start()
         {
             // 首次加载的游戏场景不会触发 sceneLoaded，这里补一次放置
+            Debug.Log("[GameManager] Start（首次场景放置）");
             PlaceOrSpawnPlayerAtSpawnPoint();
         }
 
         void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
+            Debug.Log($"[GameManager] 场景已加载: {scene.name}");
             PlaceOrSpawnPlayerAtSpawnPoint();
         }
 
@@ -59,7 +63,11 @@ namespace Code.Scripts
         public void PlaceOrSpawnPlayerAtSpawnPoint()
         {
             var spawnPoint = GameObject.FindWithTag("SpawnPoint");
-            if (spawnPoint == null) return;
+            if (spawnPoint == null)
+            {
+                Debug.Log("[GameManager] 未找到 Tag=SpawnPoint，跳过放置玩家");
+                return;
+            }
 
             var spawnTransform = spawnPoint.transform;
             Vector3 pos = spawnTransform.position;
@@ -67,13 +75,19 @@ namespace Code.Scripts
 
             if (_currentPlayer == null)
             {
-                if (playerPrefab == null) return;
+                if (playerPrefab == null)
+                {
+                    Debug.Log("[GameManager] 未设置 Player Prefab，跳过生成");
+                    return;
+                }
                 _currentPlayer = Instantiate(playerPrefab, pos, rot);
                 _currentPlayer.tag = "Player"; // 保证 EndTrigger 能识别
+                Debug.Log($"[GameManager] 已生成玩家于 SpawnPoint {spawnPoint.name} @ {pos}");
             }
             else
             {
                 _currentPlayer.transform.SetPositionAndRotation(pos, rot);
+                Debug.Log($"[GameManager] 已移动已有玩家到 SpawnPoint {spawnPoint.name} @ {pos}");
             }
         }
 
@@ -83,11 +97,16 @@ namespace Code.Scripts
         /// </summary>
         public void SetPlayerControlEnabled(bool enabled)
         {
-            if (_currentPlayer == null) return;
+            if (_currentPlayer == null)
+            {
+                Debug.Log("[GameManager] SetPlayerControlEnabled: 无当前玩家，忽略");
+                return;
+            }
             foreach (var mb in _currentPlayer.GetComponents<MonoBehaviour>())
             {
                 if (mb != null) mb.enabled = enabled;
             }
+            Debug.Log($"[GameManager] 玩家控制已{(enabled ? "开启" : "关闭")}");
         }
     }
 }
