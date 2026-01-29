@@ -28,11 +28,20 @@ public class MaskStateManager : MonoBehaviour
         }
     }
 
+    public void SetMaskState(MaskState state)
+    {
+        if (maskState == state) return;
+        maskState = state;
+        Debug.Log($"Mask state set to {maskState}");
+        RefreshSceneByMaskStatus();
+    }
+
+    public void SetMaskOn()  => SetMaskState(MaskState.On);
+    public void SetMaskOff() => SetMaskState(MaskState.Off);
+
     private void ToggleMask()
     {
-        maskState = maskState == MaskState.On ? MaskState.Off : MaskState.On;
-        Debug.Log($"Mask state changed to {maskState}");
-        RefreshSceneByMaskStatus();
+        SetMaskState(maskState == MaskState.On ? MaskState.Off : MaskState.On);
     }
 
     private void RefreshSceneByMaskStatus()
