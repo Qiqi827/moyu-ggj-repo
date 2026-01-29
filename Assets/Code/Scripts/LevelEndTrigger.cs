@@ -1,0 +1,18 @@
+using UnityEngine;
+
+/// <summary>
+/// 挂在关卡结束区域物体上（带 Collider 且 Is Trigger = true）。
+/// 玩家（Tag "Player"）进入后通知当前场景的 LevelSceneManager 进入结束流程。
+/// </summary>
+[RequireComponent(typeof(Collider))]
+public class LevelEndTrigger : MonoBehaviour
+{
+    void OnTriggerEnter(Collider other)
+    {
+        if (!other.CompareTag("Player")) return;
+
+        var manager = FindObjectOfType<LevelSceneManager>();
+        if (manager != null)
+            manager.OnPlayerReachedEnd();
+    }
+}
